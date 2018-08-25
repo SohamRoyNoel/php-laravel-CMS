@@ -39,7 +39,11 @@ class AdminUsersController extends Controller
 
 
     public function store(UserRequest $request){
-        return $request->all();
+
+        User::create($request->all());
+
+        return redirect('/admin/users');
+
     }
 
     /**
@@ -87,6 +91,9 @@ class AdminUsersController extends Controller
         //
     }
 
-    public function jondis(Request $request){
+    public function draw(){
+        $users = User::all();
+
+        return view('admin.users.index', compact('users'));
     }
 }

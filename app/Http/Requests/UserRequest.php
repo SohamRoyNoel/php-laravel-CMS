@@ -26,8 +26,8 @@ class UserRequest extends Request
         return [
             'name' => 'required',
             'email'=> 'required',
-            'role' => 'required',
-            'active' => 'required',
+            'role_id' => 'required',
+            'is_active' => 'required',
             'password' => 'required'
         ];
     }

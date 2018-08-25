@@ -20,13 +20,18 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('role', 'Role:') !!}
-        {!! Form::select('role', array(''=>'Select Role') + $roles,  null, ['class'=>'form-control']) !!}
+        {!! Form::label('photo_id', 'Upload your file:') !!}
+        {!! Form::file('photo_id', null, ['class'=>'form-control']) !!}
     </div>
 
     <div class="form-group">
-        {!! Form::label('acive', 'Active:') !!}
-        {!! Form::select('acive',array(1 => 'Online', 0 => 'Offline'), 0, ['class'=>'form-control']) !!}
+        {!! Form::label('role_id', 'Role:') !!}
+        {!! Form::select('role_id', array(''=>'Select Role') + $roles,  null, ['class'=>'form-control']) !!}
+    </div>
+
+    <div class="form-group">
+        {!! Form::label('is_active', 'Active:') !!}
+        {!! Form::select('is_active',array(1 => 'Online', 0 => 'Offline'), null, ['class'=>'form-control']) !!}
     </div>
 
 
