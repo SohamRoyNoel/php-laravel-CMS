@@ -22,3 +22,10 @@ Route::get('/home', 'HomeController@index');
 Route::get('/admin', function (){
     return view('admin.index');
 });
+
+Route::resource('/admin/creates', 'AdminUsersController');
+
+Route::get('/admin/users', 'AdminUsersController@index');
+
+Route::get('/admin/creater', 'AdminUsersController@create');
+
