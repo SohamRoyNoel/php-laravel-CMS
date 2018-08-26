@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 
+
+
+
 @section('content')
+
+    <h1>Create An User</h1>
 
     {!! Form::open(['method'=>'POST', 'action'=>'AdminUsersController@store', 'files'=>true]) !!}
 
