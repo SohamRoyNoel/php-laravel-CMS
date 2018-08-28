@@ -10,7 +10,8 @@
 
         {{--<img height="50" src="{{$user->photo? URL::to($user->photo->path) : 'http://placehold.it/400x400'}}" alt="" >--}}
         {{--<img height="100" width="100" src="{{$user->photo?$user->photo->path:'No Pic Uploaded'}}" alt="">--}}
-        <img src="../../1535263995GeneralInferiorFireant-size_restricted.gif" height="100" width="100">
+        {{--<img src="../../1535263995GeneralInferiorFireant-size_restricted.gif" height="100" width="100">--}}
+        <img height="250" width="250" class="img img-circle" src="{{$user->photo? 'http://localhost/Goals/public/images/'.$user->photo->path:'No Pic Uploaded'}}">
         {{--<img src="{{$user->photo ? $user->photo->path : 'http://placehold.it/400x400'}}" alt="" class="img-responsive img-rounded">--}}
 
 
@@ -47,7 +48,7 @@
 
 
         <div class="form-group">
-            {!! Form::submit('Create User', ['class'=>'btn btn-primary']) !!}
+            {!! Form::submit('Edit User', ['class'=>'btn btn-primary']) !!}
         </div>
 
         {!! Form::close() !!}

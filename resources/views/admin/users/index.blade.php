@@ -4,6 +4,15 @@
 @section('content')
     <h1>Show All users</h1>
 
+    @if(Session::has('deleted_user'))
+
+        <script>
+            alert('{{session('deleted_user')}}');
+        </script>
+
+    @endif
+
+
     <table style="width:100%" class="table table-hover table-responsive">
         <tr>
             <th>Id</th>
@@ -14,6 +23,7 @@
             <th>Image</th>
             <th>Created At</th>
             <th>Updated At</th>
+            <th></th>
         </tr>
         @if($users)
             @foreach($users as $user)
@@ -29,13 +39,19 @@
                                 {{'Offline'}}
                             @endif
                         </td>
-                        <td><img height="100" width="100" src="{{$user->photo?$user->photo->path:'No Pic Uploaded'}}"> </td>
+                        <td><img height="100" width="100" src="{{$user->photo? 'http://localhost/Goals/public/images/'.$user->photo->path:'No Pic Uploaded'}}"> </td>
                         <td>{{$user->created_at->diffForHumans()}}</td>
                         <td>{{$user->updated_at->diffForHumans()}}</td>
-
+                    <td>
+                        {!! Form::open(['method'=>'Delete', 'action'=>['AdminUsersController@destroy', $user->id]]) !!}
+                            {!! Form::submit('Delete', ['class'=>'btn btn-danger']) !!}
+                        {!! Form::close() !!}
+                    </td>
                 </tr>
             @endforeach
         @endif
+
+
     </table>
 
 
