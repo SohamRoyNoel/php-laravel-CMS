@@ -4,6 +4,7 @@
 
 
 @section('content')
+
     <h1>Create A Post</h1>
 
     {!! Form::open(['method'=>'POST', 'action'=>'AdminPostsController@store', 'files'=>true]) !!}
@@ -14,8 +15,8 @@
     </div>
 
     <div class="form-group">
-    {!! Form::label('category_id', 'Role:') !!}
-    {!! Form::select('category_id', array(''=>'Select Role'),  null, ['class'=>'form-control']) !!}
+    {!! Form::label('category_id', 'Post Category:') !!}
+    {!! Form::select('category_id', array(''=>'Select Category')+ $post,  null, ['class'=>'form-control']) !!}
     </div>
 
     <div class="form-group">
@@ -33,9 +34,6 @@
     </div>
 
     {!! Form::close() !!}
-
-
-
 
     @include('pertial.validationErr')
 
