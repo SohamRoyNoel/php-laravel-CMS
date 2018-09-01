@@ -16,4 +16,8 @@ class Photo extends Model
 //    public function getPathAttribute($photo){
 //        return $this->uploads . $photo;
 //    }
+
+    public function post(){
+        return $this->hasMany('App\Post');
+    }
 }
