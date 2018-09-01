@@ -14,7 +14,7 @@
             <th>body</th>
             <th>Created At</th>
             <th>Updated At</th>
-            <th></th>
+            <th>Delete</th>
         </tr>
         @if($post)
             @foreach($post as $pos)
@@ -29,7 +29,13 @@
                     <td>{{$pos->body}} </td>
                     <td>{{$pos->created_at->diffForHumans()}}</td>
                     <td>{{$pos->updated_at->diffForHumans()}}</td>
+                    <td>
 
+                        {!! Form::open(['method'=>'Delete', 'action'=>['AdminPostsController@destroy', $pos->id]]) !!}
+                        {!! Form::submit('Delete', ['class'=>'btn btn-danger']) !!}
+                        {!! Form::close() !!}
+
+                    </td>
                 </tr>
             @endforeach
         @endif

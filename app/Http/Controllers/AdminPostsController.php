@@ -60,11 +60,25 @@ class AdminPostsController extends Controller
 
     public function update(Request $request, $id)
     {
-        return $request->all();
+        $post = Post::findOrFail($id);
+        $input = $request->all();
+
+        if ($file = $request->file('photo_id')){
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $photo = Photo::create(['path'=>$name]);
+            $input['photo_id'] = $photo->id;
+        }
+
+        $post->update($input);
+
+        return redirect('/admin/posts');
     }
 
     public function destroy($id)
     {
-        //
+        Post::destroy($id);
+
+        return redirect('/admin/posts');
     }
 }
