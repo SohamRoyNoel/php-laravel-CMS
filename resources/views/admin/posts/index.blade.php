@@ -17,18 +17,18 @@
             <th></th>
         </tr>
         @if($post)
-            @foreach($post as $post)
+            @foreach($post as $pos)
                 <tr>
-                    <td>{{$post->id}}</td>
-                    <td>{{$post->user->name}}</td>
-                    <td>{{$post->category_id}}</td>
-                    <td><img height="100" width="100" src="{{$post->photo? 'http://localhost/Goals/public/images/'.$post->photo->path:'No Pic Uploaded'}}"> </td>
+                    <td>{{$pos->id}}</td>
+                    <td><a href="{{route('admin.posts.edit', $pos->id)}}">{{$pos->user->name}}</a></td>
+                    <td>{{$pos->category->name}}</td>
+                    <td><img height="100" width="100" src="{{$pos->photo? 'http://localhost/Goals/public/images/'.$pos->photo->path:'No Pic Uploaded'}}"> </td>
                     <td>
-                        {{$post->title}}
+                        {{$pos->title}}
                     </td>
-                    <td>{{$post->body}} </td>
-                    <td>{{$post->created_at->diffForHumans()}}</td>
-                    <td>{{$post->updated_at->diffForHumans()}}</td>
+                    <td>{{$pos->body}} </td>
+                    <td>{{$pos->created_at->diffForHumans()}}</td>
+                    <td>{{$pos->updated_at->diffForHumans()}}</td>
 
                 </tr>
             @endforeach
