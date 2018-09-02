@@ -81,4 +81,10 @@ class AdminPostsController extends Controller
 
         return redirect('/admin/posts');
     }
+
+    public function posts($id){
+        $post = Post::findOrFail($id);
+        $category = Category::all()->take(5);
+        return view('post', compact('post', 'category'));
+    }
 }

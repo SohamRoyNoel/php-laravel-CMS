@@ -23,7 +23,7 @@ Route::get('/admin', function (){
     return view('admin.index');
 });
 
-
+Route::get('/post/{id}', 'AdminPostsController@posts');
 
 
 Route::group(['middleware'=>'admin'], function (){
@@ -39,5 +39,9 @@ Route::group(['middleware'=>'admin'], function (){
     Route::resource('/admin/categories', 'AdminCategoriesController');
 
     Route::resource('/admin/media', 'AdminPhotosController');
+
+    Route::resource('/admin/comments', 'PostCommentsController');
+
+    Route::resource('/admin/comment/replies', 'CommentRepliesController');
 
 });

@@ -27,7 +27,7 @@
 
 
     @yield('styles')
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css">
 
 </head>
 
@@ -159,14 +159,9 @@
                                 <a href="{{route('admin.categories.store')}}">All Categories</a>
                             </li>
 
-                            <li>
-                                <a href="{{route('admin.categories.create')}}">Create Category</a>
-                            </li>
-
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-
 
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i>Media<span class="fa arrow"></span></a>
@@ -184,10 +179,9 @@
                     </li>
 
 
-
-
-
-
+                    <li>
+                        <a href="{{route('admin.comments.index')}}"><i class="fa fa-table fa-fw"></i> Comments</a>
+                    </li>
 
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -311,10 +305,6 @@
                     <!-- /.nav-second-level -->
                 </li>
 
-
-
-
-
             </ul>
 
         </div>
@@ -322,11 +312,6 @@
     </div>
 
 </div>
-
-
-
-
-
 
 <!-- Page Content -->
 <div id="page-wrapper">
