@@ -12,6 +12,7 @@
             <th>photo_id</th>
             <th>title</th>
             <th>body</th>
+            <th>Comments</th>
             <th>Created At</th>
             <th>Updated At</th>
             <th>Delete</th>
@@ -20,13 +21,19 @@
             @foreach($post as $pos)
                 <tr>
                     <td>{{$pos->id}}</td>
-                    <td><a href="{{route('admin.posts.edit', $pos->id)}}">{{$pos->user->name}}</a></td>
+                    <td>{{$pos->user->name}}</td>
                     <td>{{$pos->category->name}}</td>
-                    <td><img height="100" width="100" src="{{$pos->photo? 'http://localhost/Goals/public/images/'.$pos->photo->path:'No Pic Uploaded'}}"> </td>
+                    <td><a href="{{route('views.post', $pos->id)}}"><img data-toggle="tooltip" title="See The Post" height="100" width="100" src="{{$pos->photo? 'http://localhost/Goals/public/images/'.$pos->photo->path:'No Pic Uploaded'}}"></a> </td>
+                    <script>
+                        $(document).ready(function(){
+                            $('[data-toggle="tooltip"]').tooltip();
+                        });
+                    </script>
                     <td>
-                        {{$pos->title}}
+                        <a data-toggle="tooltip" title="Edit The Post" href="{{route('admin.posts.edit', $pos->id)}}">{{$pos->title}}</a>
                     </td>
                     <td>{{$pos->body}} </td>
+                    <td><a data-toggle="tooltip" title="See Comments Related To The Post" href="{{route('admin.comments.show', $pos->id)}}">{{$pos->title}}</a></td>
                     <td>{{$pos->created_at->diffForHumans()}}</td>
                     <td>{{$pos->updated_at->diffForHumans()}}</td>
                     <td>

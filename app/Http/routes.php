@@ -23,7 +23,7 @@ Route::get('/admin', function (){
     return view('admin.index');
 });
 
-Route::get('/post/{id}', 'AdminPostsController@posts');
+Route::get('/post/{id}', ['as'=>'views.post', 'uses'=>'AdminPostsController@posts']);
 
 
 Route::group(['middleware'=>'admin'], function (){
