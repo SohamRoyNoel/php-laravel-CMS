@@ -28,15 +28,15 @@
     <hr>
 
     <!-- Blog Comments -->
-
-    <!-- Comments Form -->
-    <div class="well">
-        @if(Session::has('message'))
-            {{session('message')}}
+    @if(Auth::check())
+        <!-- Comments Form -->
+        <div class="well">
+            @if(Session::has('message'))
+                {{session('message')}}
             @endif
 
-        <h4>Leave a Comment:</h4>
-        {!! Form::open(['method'=>'POST', 'action'=>'PostCommentsController@store', 'files'=>true]) !!}
+            <h4>Leave a Comment:</h4>
+            {!! Form::open(['method'=>'POST', 'action'=>'PostCommentsController@store', 'files'=>true]) !!}
 
             <input type="hidden" name="post_id" value="{{$post->id}}">
 
@@ -45,53 +45,81 @@
             </div>
 
 
-             {!! Form::submit('Create Post', ['class'=>'btn btn-primary']) !!}
+            {!! Form::submit('Comment', ['class'=>'btn btn-primary']) !!}
 
             {!! Form::close() !!}
-    </div>
-
+        </div>
+    @endif
     <hr>
 
     <!-- Posted Comments -->
 
     <!-- Comment -->
-    <div class="media">
-        <a class="pull-left" href="#">
-            <img class="media-object" src="http://placehold.it/64x64" alt="">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading">Start Bootstrap
-                <small>August 25, 2014 at 9:30 PM</small>
-            </h4>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-        </div>
-    </div>
+
 
     <!-- Comment -->
-    <div class="media">
-        <a class="pull-left" href="#">
-            <img class="media-object" src="http://placehold.it/64x64" alt="">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading">Start Bootstrap
-                <small>August 25, 2014 at 9:30 PM</small>
-            </h4>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            <!-- Nested Comment -->
+    @if(count($comment) > 0)
+        @foreach($comment as $com)
             <div class="media">
                 <a class="pull-left" href="#">
-                    <img class="media-object" src="http://placehold.it/64x64" alt="">
+
+                    <img class="media-object" height="64" width="64" src="{{$com->photo_id? 'http://localhost/Goals/public/images/'.$com->photo_id :'No Pic Uploaded'}}" alt="">
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading">Nested Start Bootstrap
-                        <small>August 25, 2014 at 9:30 PM</small>
+                    <h4 class="media-heading">{{$com->author}}
+                        <small>{{$com->created_at->diffForHumans()}}</small>
                     </h4>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                {{$com->body}}
+                <!-- Nested Comment -->
+                    <br>
+                    @if(count($com->reply) > 0)
+                        @foreach($com->reply as $rep)
+
+
+
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <img class="media-object" height="64" width="64" src="{{$rep->photo? 'http://localhost/Goals/public/images/'.$rep->photo :'No Pic Uploaded'}}" alt="">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{$rep->author}}
+                                        <small>{{$rep->author}}</small>
+                                    </h4>
+                                    {{$rep->body}}
+                                </div>
+                                <div class="comment-reply-container">
+
+
+                                    <button class="toggle-reply btn btn-primary pull-right">Reply</button>
+
+                                    <div class="comment-reply">
+                                        {!! Form::open(['method'=>'POST', 'action'=>'CommentRepliesController@createReply', 'files'=>true]) !!}
+
+                                        <input type="hidden" name="comment_id" value="{{$com->id}}">
+
+                                        <div class="form-group">
+                                            {!! Form::textarea('body', null, ['class'=>'form-control', 'placeholder'=>'Name', 'rows'=>3]) !!}
+                                        </div>
+
+
+                                        {!! Form::submit('Post Reply', ['class'=>'btn btn-primary']) !!}
+
+                                        {!! Form::close() !!}
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                    @endforeach
+                @endif
+                <!-- End Nested Comment -->
                 </div>
             </div>
-            <!-- End Nested Comment -->
-        </div>
-    </div>
+        @endforeach
+    @endif
 @stop
 
 @section('category')
@@ -110,4 +138,17 @@
         <!-- /.row -->
     </div>
 
-    @stop
+@stop
+
+@section('scripts')
+
+    <script>
+
+        $(".comment-reply-container .toggle-reply").click(function(){
+
+            $(this).next().slideToggle("slow");
+        });
+
+    </script>
+
+@stop

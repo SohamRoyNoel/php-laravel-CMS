@@ -14,6 +14,7 @@ class CreateCommentRepliesTable extends Migration
             $table->integer('is_active')->default();
             $table->string('author');
             $table->string('email');
+            $table->string('photo');
             $table->text('body');
             $table->timestamps();
 

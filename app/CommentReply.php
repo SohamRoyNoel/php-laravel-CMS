@@ -10,11 +10,12 @@ class CommentReply extends Model
         'comment_id',
         'is_active',
         'author',
+        'photo',
         'email',
         'body'
     ];
 
-    public function comments(){
-        return $this->belongsTo('App\Comment');
-    }
+//    public function comments(){
+//        return $this->belongsTo('App\Comment');
+//    }
 }

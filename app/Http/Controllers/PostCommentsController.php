@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\CommentReply;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,8 @@ class PostCommentsController extends Controller
     public function index()
     {
         $comments = Comment::all();
-
-        return view('admin.comments.index', compact('comments'));
+        $reply = CommentReply::all();
+        return view('admin.comments.index', compact('comments', 'reply'));
     }
 
     public function create()
@@ -27,10 +28,13 @@ class PostCommentsController extends Controller
     {
 
         $user = Auth::user();
+
+//        return $user->photo;
         $input['post_id']=$request->post_id;
         $input['author']=$user->name;
         $input['email']=$user->email;
         $input['body']=$request->body;
+        $input['photo_id']=$user->photo->path;
 
         Comment::create($input);
         $request->session()->flash('message', 'Your comment has been published');

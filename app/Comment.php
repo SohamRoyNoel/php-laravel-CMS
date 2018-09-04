@@ -10,6 +10,7 @@ class Comment extends Model
         'post_id',
         'is_active',
         'author',
+        'photo_id',
         'email',
         'body'
     ];
@@ -21,4 +22,6 @@ class Comment extends Model
     public function post(){
         return $this->belongsTo('App\Post');
     }
+
+
 }
