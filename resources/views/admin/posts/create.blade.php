@@ -5,6 +5,8 @@
 
 @section('content')
 
+    @include('includes.tinyeditor')
+
     <h1>Create A Post</h1>
 
     {!! Form::open(['method'=>'POST', 'action'=>'AdminPostsController@store', 'files'=>true]) !!}
@@ -23,6 +25,9 @@
         {!! Form::label('body', 'Post Content:') !!}
         {!! Form::textarea('body', null, ['class'=>'form-control', 'placeholder'=>'Name']) !!}
     </div>
+    <script>
+        CKEDITOR.replace( 'body' );
+    </script>
 
     <div class="form-group">
         {!! Form::label('photo_id', 'Upload Post Image:') !!}
